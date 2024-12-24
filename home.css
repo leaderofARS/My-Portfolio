@@ -37,6 +37,8 @@
     left:3px;
     float:right;
 }
+
+
 .blocke{
     text-align: center;
     font-size: larger;
@@ -47,6 +49,40 @@
     background-color: rgba(8, 102, 125, 0.859);
     border:3px solid rgba(41, 209, 214, 0.923) ;
     position: absolute;
-    left: 47%;
+    left: 7%;
     top: 975px;
+    height: 5opx;
+    width: auto;
+}
+
+
+.blocki{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color: aliceblue;
+    display:block;
+    block-size: auto;
+    background-color: rgba(8, 102, 125, 0.859);
+    border:3px solid rgba(41, 209, 214, 0.923) ;
+    position: absolute;
+    left: 45%;
+    top: 975px;
+    height: 5opx;
+    width: auto;
+}
+.blocky{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color: aliceblue;
+    display:block;
+    block-size: auto;
+    background-color: rgba(8, 102, 125, 0.859);
+    border:3px solid rgba(41, 209, 214, 0.923) ;
+    position: absolute;
+    left: 85%;
+    top: 975px;
+    height: 5opx;
+    width: auto;
 }
