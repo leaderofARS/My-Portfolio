@@ -1,1 +1,1 @@
-# sample_name
+# EternaVision
