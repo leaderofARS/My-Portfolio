@@ -7,8 +7,8 @@
 }
 .block{
     text-align: center;
-    font-size: larger;
-    font-weight: bold;
+    font-size:xx-large;
+    font-weight:bolder;
     color: aliceblue;
     display:block;
     block-size: auto;
@@ -16,6 +16,8 @@
     border:3px solid rgba(207, 164, 9, 0.923) ;
     position: absolute;
     left: 47%;
+    height: 35px;
+    width: auto;
 }
 .img{
     border:5px solid rgba(15, 90, 161, 0.955) ;
@@ -81,7 +83,7 @@
     background-color: rgba(8, 102, 125, 0.859);
     border:3px solid rgba(41, 209, 214, 0.923) ;
     position: absolute;
-    left: 85%;
+    left: 84%;
     top: 975px;
     height: 5opx;
     width: auto;
