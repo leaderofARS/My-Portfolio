@@ -1,0 +1,51 @@
+.h1{
+    text-align: center;
+    font-weight: bolder;
+    font-size: xx-large;
+    color:rgba(120, 85, 18, 0.967);
+}
+.block{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color: aliceblue;
+    display:block;
+    block-size: auto;
+    background-color: rgba(171, 138, 7, 0.859);
+    border:3px solid rgba(207, 164, 9, 0.923) ;
+    position: absolute;
+    left: 47%;
+}
+.img{
+    border:5px solid rgba(15, 90, 161, 0.955) ;
+    padding: 3px;
+    position: absolute;
+    left:10%;
+    top:24%;
+    height:65%;
+    width: 80%;
+
+}
+.p{
+    border:8px solid rgba(14, 108, 97, 0.908);
+    padding:1px;
+    background-color: rgb(57, 171, 133);
+    color:aliceblue;
+    position:absolute;
+    top:700px;
+    left:3px;
+    float:right;
+}
+.blocke{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color: aliceblue;
+    display:block;
+    block-size: auto;
+    background-color: rgba(8, 102, 125, 0.859);
+    border:3px solid rgba(41, 209, 214, 0.923) ;
+    position: absolute;
+    left: 47%;
+    top: 975px;
+}
