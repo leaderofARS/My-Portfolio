@@ -7,8 +7,12 @@
 }
 .block{
     text-align: center;
+
     font-size: larger;
     font-weight: bold;
+    font-size:xx-large;
+    font-weight:bolder;
+
     color: aliceblue;
     display:block;
     block-size: auto;
@@ -16,10 +20,19 @@
     border:3px solid rgba(207, 164, 9, 0.923) ;
     position: absolute;
     left: 47%;
+
 }
 .img{
     border:5px solid rgba(15, 90, 161, 0.955) ;
     padding: 10px;
+
+    height: 35px;
+    width: auto;
+}
+.img{
+    border:5px solid rgba(15, 90, 161, 0.955) ;
+    padding: 3px;
+
     position: absolute;
     left:10%;
     top:24%;
@@ -33,10 +46,19 @@
     background-color: rgb(57, 171, 133);
     color:aliceblue;
     position:absolute;
+
     top: 800px;
     left:3px;
     float:right;
 }
+.p1{
+    top:700px;
+    left:3px;
+    float:right;
+}
+
+
+
 .blocke{
     text-align: center;
     font-size: larger;
@@ -47,9 +69,19 @@
     background-color: rgba(8, 102, 125, 0.859);
     border:3px solid rgba(41, 209, 214, 0.923) ;
     position: absolute;
+
     left: 5%;
     top: 1075px;
 }
+.blocki{
+    left: 7%;
+    top: 975px;
+    height: 5opx;
+    width: auto;
+}
+
+
+
 .blocki{
     text-align: center;
     font-size: larger;
@@ -62,6 +94,10 @@
     position: absolute;
     left: 45%;
     top: 1075px;
+    top: 975px;
+    height: 5opx;
+    width: auto;
+
 }
 .blocky{
     text-align: center;
@@ -75,4 +111,8 @@
     position: absolute;
     left: 87%;
     top: 1075px;
+    left: 84%;
+    top: 975px;
+    height: 5opx;
+    width: auto;
 }
