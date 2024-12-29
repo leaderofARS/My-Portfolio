@@ -14,7 +14,7 @@
     font-weight:bolder;
 
     color: aliceblue;
-    display:block;
+    display:inline-block;
     block-size: auto;
     background-color: rgba(171, 138, 7, 0.859);
     border:3px solid rgba(207, 164, 9, 0.923) ;
@@ -88,8 +88,12 @@
     border:3px solid rgba(41, 209, 214, 0.923) ;
     position: absolute;
     left: 45%;
+
     top: 1075px;
     top: 975px;
+
+    top:975px;
+
     height: 5opx;
     width: auto;
 
@@ -104,10 +108,15 @@
     background-color: rgba(8, 102, 125, 0.859);
     border:3px solid rgba(41, 209, 214, 0.923) ;
     position: absolute;
+
     left: 87%;
     top: 1075px;
     left: 84%;
     top: 975px;
+
+    left: 83%;
+    top:975px;
+
     height: 5opx;
-    width: auto;
+    width: auto; 
 }
