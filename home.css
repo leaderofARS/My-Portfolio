@@ -46,7 +46,6 @@
     background-color: rgb(57, 171, 133);
     color:aliceblue;
     position:absolute;
-
     top: 800px;
     left:3px;
     float:right;
@@ -64,15 +63,8 @@
     background-color: rgba(8, 102, 125, 0.859);
     border:3px solid rgba(41, 209, 214, 0.923) ;
     position: absolute;
-
     left: 5%;
     top: 1075px;
-}
-.blocki{
-    left: 7%;
-    top: 975px;
-    height: 5opx;
-    width: auto;
 }
 
 
@@ -88,12 +80,7 @@
     border:3px solid rgba(41, 209, 214, 0.923) ;
     position: absolute;
     left: 45%;
-
     top: 1075px;
-    top: 975px;
-
-    top:975px;
-
     height: 5opx;
     width: auto;
 
@@ -108,15 +95,8 @@
     background-color: rgba(8, 102, 125, 0.859);
     border:3px solid rgba(41, 209, 214, 0.923) ;
     position: absolute;
-
     left: 87%;
     top: 1075px;
-    left: 84%;
-    top: 975px;
-
-    left: 83%;
-    top:975px;
-
     height: 5opx;
     width: auto; 
 }
