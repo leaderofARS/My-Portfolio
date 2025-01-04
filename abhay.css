@@ -23,13 +23,13 @@
         color: antiquewhite;
         position: relative;
     }
-    .abhay p{
+    .abhay .p{
         float:right;
         position: relative;
         right:0%;
         font-size: larger;
         font-weight: bold;
-        color:antiquewhite
+        color:antiquewhite;
     
     }
     .back{
