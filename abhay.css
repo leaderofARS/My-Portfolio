@@ -23,7 +23,16 @@
     color: antiquewhite;
     position: relative;
 }
-.abhay p{
+p{
+    float:right;
+    position: relative;
+    right: ;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color:antiquewhite
+}
+.abhay .p{
     float:right;
     position: relative;
     right:0%;
