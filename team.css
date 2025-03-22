@@ -131,3 +131,56 @@
 
 }
 
+/* iPhone SE (375px) */
+@media screen and (max-width: 375px) {
+    .container { flex-direction: column; }
+}
+
+/* iPhone 12, 13, 14, 15 (390px) */
+@media screen and (max-width: 390px) {
+    .container { flex-direction: column; }
+}
+
+/* iPhone 12 Pro Max, 14 Plus, 15 Plus (428px) */
+@media screen and (max-width: 428px) {
+    .container { flex-direction: column; }
+}
+
+/* Small Android Phones (360px) */
+@media screen and (max-width: 360px) {
+    .container { flex-direction: column; }
+}
+
+/* Medium Android Phones (390px) */
+@media screen and (max-width: 390px) {
+    .container { flex-direction: column; }
+}
+
+/* Large Android Phones (412px) */
+@media screen and (max-width: 412px) {
+    .container { flex-direction: column; }
+}
+
+/* iPad Mini & Small Tablets (768px) */
+@media screen and (max-width: 768px) {
+    .container { flex-direction: column; }
+}
+
+/* iPad Pro & Large Tablets (1024px) */
+@media screen and (max-width: 1024px) {
+    .container { flex-direction: row; }
+}
+/* Small Laptops (1366px) */
+@media screen and (max-width: 1366px) {
+    .container { flex-direction: row; }
+}
+
+/* Standard Desktop Screens (1440px) */
+@media screen and (max-width: 1440px) {
+    .container { max-width: 80%; }
+}
+
+/* Large Screens (1920px) */
+@media screen and (max-width: 1920px) {
+    .container { max-width: 90%; }
+}
