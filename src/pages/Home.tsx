@@ -161,7 +161,7 @@ export default function Home() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-8 pl-10"
+              className="space-y-8 pl-28"
             >
               <div className="space-y-4">
                 <motion.div
