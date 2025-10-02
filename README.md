@@ -54,6 +54,14 @@ The project is configured for automatic deployment to GitHub Pages:
 2. Set Source to "GitHub Actions"
 3. The deployment workflow will handle the rest
 
+### Troubleshooting GitHub Pages
+If the site appears blank or without styling:
+1. Check that the deployment workflow completed successfully
+2. Ensure JavaScript is enabled in your browser
+3. Clear browser cache and refresh
+4. Check browser console for any errors
+5. Verify the site URL matches your repository name
+
 ## Notes
 
 - Tailwind is configured in `tailwind.config.ts` with a dark palette. Ensure images live under `public/`.
