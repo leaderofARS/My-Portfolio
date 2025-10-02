@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float" />
@@ -195,7 +195,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <SectionReveal className="py-20">
+      <SectionReveal id="about" className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <motion.div
@@ -239,7 +239,7 @@ export default function Home() {
       </SectionReveal>
 
       {/* Skills Section */}
-      <SectionReveal className="py-20 bg-muted/20">
+      <SectionReveal id="skills" className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center space-y-4 mb-12">
@@ -340,7 +340,7 @@ export default function Home() {
       </SectionReveal>
 
       {/* Stats Section */}
-      <SectionReveal className="py-20">
+      <SectionReveal id="stats" className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-12">
             <div className="space-y-4">
@@ -359,7 +359,7 @@ export default function Home() {
       </SectionReveal>
 
       {/* CTA Section */}
-      <SectionReveal className="py-20 bg-muted/20">
+      <SectionReveal id="contact" className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <motion.div

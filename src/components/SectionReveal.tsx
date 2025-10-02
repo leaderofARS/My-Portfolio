@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react'
 export function SectionReveal({
   children,
   className,
+  id,
 }: {
   children: React.ReactNode
   className?: string
+  id?: string
 }) {
   const { ref, inView } = useInView<HTMLDivElement>({
     rootMargin: '-80px 0px -10% 0px',
@@ -21,6 +23,7 @@ export function SectionReveal({
   return (
     <motion.div
       ref={ref}
+      id={id}
       className={className}
       initial={{ opacity: 0, y: 24 }}
       animate={hasShown ? { opacity: 1, y: 0 } : {}}

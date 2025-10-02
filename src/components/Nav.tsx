@@ -1,36 +1,73 @@
 import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Home, User, Code, BarChart3, FolderOpen, Award, Mail } from 'lucide-react'
+import { Menu, X, Home, User, Code, BarChart3, Mail, FolderOpen, Award } from 'lucide-react'
 import { Button } from './Button'
 import { classNames } from '~/lib/utils'
 
-const navItems = [
-  { to: '/', label: 'Home', icon: Home },
-  { to: '/about', label: 'About', icon: User },
-  { to: '/skills', label: 'Skills', icon: Code },
-  { to: '/stats', label: 'Stats', icon: BarChart3 },
+// Navigation items for other pages
+const pageNavItems = [
   { to: '/projects', label: 'Projects', icon: FolderOpen },
   { to: '/certificates', label: 'Certificates', icon: Award },
-  { to: '/contact', label: 'Contact', icon: Mail },
+]
+
+// Section navigation items for home page
+const sectionNavItems = [
+  { to: '#hero', label: 'Home', icon: Home },
+  { to: '#about', label: 'About', icon: User },
+  { to: '#skills', label: 'Skills', icon: Code },
+  { to: '#stats', label: 'Stats', icon: BarChart3 },
+  { to: '#contact', label: 'Contact', icon: Mail },
 ]
 
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('hero')
   const location = useLocation()
+  const isHomePage = location.pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
+      
+      // Update active section based on scroll position (only on home page)
+      if (isHomePage) {
+        const sections = ['hero', 'about', 'skills', 'stats', 'contact']
+        const scrollPosition = window.scrollY + 120 // Account for header height
+        
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const element = document.getElementById(sections[i])
+          if (element && element.offsetTop <= scrollPosition) {
+            setActiveSection(sections[i])
+            break
+          }
+        }
+      }
     }
+    
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isHomePage])
 
   useEffect(() => {
     setIsOpen(false)
   }, [location])
+
+  const handleSectionClick = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const headerOffset = 80 // Account for fixed header
+      const elementPosition = element.offsetTop
+      const offsetPosition = elementPosition - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+    setIsOpen(false)
+  }
 
   return (
     <>
@@ -54,12 +91,41 @@ export function Nav() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => {
-                const Icon = item.icon
-                return (
+              {isHomePage ? (
+                // Section navigation for home page
+                sectionNavItems.map((item) => {
+                  const Icon = item.icon
+                  const sectionId = item.to.replace('#', '')
+                  const isActive = activeSection === sectionId
+                  
+                  return (
+                    <button
+                      key={item.to}
+                      onClick={() => handleSectionClick(sectionId)}
+                      className={classNames(
+                        'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2',
+                        isActive
+                          ? 'text-primary bg-primary/10'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
+                      )}
+                    >
+                      <Icon size={16} />
+                      {item.label}
+                      {isActive && (
+                        <motion.div
+                          className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"
+                          layoutId="activeTab"
+                          transition={{ duration: 0.2 }}
+                        />
+                      )}
+                    </button>
+                  )
+                })
+              ) : (
+                // Page navigation for other pages
+                <>
                   <NavLink
-                    key={item.to}
-                    to={item.to}
+                    to="/"
                     className={({ isActive }) =>
                       classNames(
                         'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2',
@@ -69,22 +135,42 @@ export function Nav() {
                       )
                     }
                   >
-                    {({ isActive }) => (
-                      <>
-                        <Icon size={16} />
-                        {item.label}
-                        {isActive && (
-                          <motion.div
-                            className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"
-                            layoutId="activeTab"
-                            transition={{ duration: 0.2 }}
-                          />
-                        )}
-                      </>
-                    )}
+                    <Home size={16} />
+                    Home
                   </NavLink>
-                )
-              })}
+                  {pageNavItems.map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <NavLink
+                        key={item.to}
+                        to={item.to}
+                        className={({ isActive }) =>
+                          classNames(
+                            'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2',
+                            isActive
+                              ? 'text-primary bg-primary/10'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
+                          )
+                        }
+                      >
+                        {({ isActive }) => (
+                          <>
+                            <Icon size={16} />
+                            {item.label}
+                            {isActive && (
+                              <motion.div
+                                className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"
+                                layoutId="activeTab"
+                                transition={{ duration: 0.2 }}
+                              />
+                            )}
+                          </>
+                        )}
+                      </NavLink>
+                    )
+                  })}
+                </>
+              )}
             </nav>
 
             {/* Mobile Menu Button */}
@@ -120,12 +206,34 @@ export function Nav() {
             >
               <div className="container mx-auto px-4 py-4">
                 <div className="flex flex-col gap-2">
-                  {navItems.map((item) => {
-                    const Icon = item.icon
-                    return (
+                  {isHomePage ? (
+                    // Section navigation for home page
+                    sectionNavItems.map((item) => {
+                      const Icon = item.icon
+                      const sectionId = item.to.replace('#', '')
+                      const isActive = activeSection === sectionId
+                      
+                      return (
+                        <button
+                          key={item.to}
+                          onClick={() => handleSectionClick(sectionId)}
+                          className={classNames(
+                            'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 text-left',
+                            isActive
+                              ? 'text-primary bg-primary/10 border border-primary/20'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
+                          )}
+                        >
+                          <Icon size={18} />
+                          {item.label}
+                        </button>
+                      )
+                    })
+                  ) : (
+                    // Page navigation for other pages
+                    <>
                       <NavLink
-                        key={item.to}
-                        to={item.to}
+                        to="/"
                         className={({ isActive }) =>
                           classNames(
                             'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
@@ -135,11 +243,31 @@ export function Nav() {
                           )
                         }
                       >
-                        <Icon size={18} />
-                        {item.label}
+                        <Home size={18} />
+                        Home
                       </NavLink>
-                    )
-                  })}
+                      {pageNavItems.map((item) => {
+                        const Icon = item.icon
+                        return (
+                          <NavLink
+                            key={item.to}
+                            to={item.to}
+                            className={({ isActive }) =>
+                              classNames(
+                                'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
+                                isActive
+                                  ? 'text-primary bg-primary/10 border border-primary/20'
+                                  : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
+                              )
+                            }
+                          >
+                            <Icon size={18} />
+                            {item.label}
+                          </NavLink>
+                        )
+                      })}
+                    </>
+                  )}
                 </div>
               </div>
             </motion.nav>
