@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState, useMemo } from 'react'
 
+
 import { ArrowRight, Download, Github, Linkedin, Mail, MapPin, Calendar } from 'lucide-react'
 import { setTitle } from '~/lib/seo'
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/Card'
 import { Button } from '~/components/Button'
 import { Badge } from '~/components/ui/Badge'
 import { Avatar, AvatarImage, AvatarFallback } from '~/components/ui/Avatar'
+import { ContactForm } from '~/components/ContactForm'
 
 import { StatCounter } from '~/components/StatCounter'
 import { SectionReveal } from '~/components/SectionReveal'
@@ -525,55 +527,72 @@ export default function Home() {
         </div>
       </SectionReveal>
 
-      {/* CTA Section */}
+      {/* Contact Section */}
       <SectionReveal id="contact" className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-4"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold">Let's Work Together</h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                I'm always open to discussing new opportunities, interesting projects, or just
-                having a chat about technology and innovation.
-              </p>
-            </motion.div>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Contact Info */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-bold">Let's Work Together</h2>
+                  <p className="text-xl text-muted-foreground">
+                    I'm always open to discussing new opportunities, interesting projects, or just
+                    having a chat about technology and innovation.
+                  </p>
+                </div>
 
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button
-                size="lg"
-                onClick={() => {
-                  const element = document.getElementById('contact')
-                  if (element) {
-                    const headerOffset = 80
-                    const elementPosition = element.offsetTop
-                    const offsetPosition = elementPosition - headerOffset
-                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
-                  }
-                }}
-              >
-                Get In Touch
-                <Mail size={18} />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => {
-                  const element = document.getElementById('projects')
-                  if (element) {
-                    const headerOffset = 80
-                    const elementPosition = element.offsetTop
-                    const offsetPosition = elementPosition - headerOffset
-                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
-                  }
-                }}
-              >
-                View My Work
-                <ArrowRight size={18} />
-              </Button>
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                      <Mail className="text-primary" size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Email</h3>
+                      <p className="text-muted-foreground">arsabhayrs@gmail.com</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                      <MapPin className="text-primary" size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Location</h3>
+                      <p className="text-muted-foreground">Bangalore, India</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => {
+                      const element = document.getElementById('projects')
+                      if (element) {
+                        const headerOffset = 80
+                        const elementPosition = element.offsetTop
+                        const offsetPosition = elementPosition - headerOffset
+                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+                      }
+                    }}
+                  >
+                    View My Work
+                    <ArrowRight size={18} />
+                  </Button>
+                </div>
+              </motion.div>
+
+              {/* Contact Form */}
+              <div className="flex justify-center lg:justify-end">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </div>
