@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState, useMemo } from 'react'
+
 import { ArrowRight, Download, Github, Linkedin, Mail, MapPin, Calendar } from 'lucide-react'
 import { setTitle } from '~/lib/seo'
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/Card'
@@ -11,6 +11,128 @@ import { Avatar, AvatarImage, AvatarFallback } from '~/components/ui/Avatar'
 import { StatCounter } from '~/components/StatCounter'
 import { SectionReveal } from '~/components/SectionReveal'
 import { Progress } from '~/components/Progress'
+import projects from '~/data/projects.json'
+import certificates from '~/data/certificates.json'
+
+// Projects Section Component
+function ProjectsSection() {
+  const allTags = Array.from(new Set(projects.flatMap((p) => p.tags)))
+  const [selected, setSelected] = useState<string | 'all'>('all')
+  const visible = useMemo(
+    () => (selected === 'all' ? projects : projects.filter((p) => p.tags.includes(selected))),
+    [selected],
+  )
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-wrap justify-center gap-2">
+        <button
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+            selected === 'all'
+              ? 'bg-primary text-primary-foreground'
+              : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+          }`}
+          onClick={() => setSelected('all')}
+        >
+          All
+        </button>
+        {allTags.map((tag) => (
+          <button
+            key={tag}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+              selected === tag
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+            }`}
+            onClick={() => setSelected(tag)}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {visible.map((project) => (
+          <Card key={project.id} variant="glass" hover className="overflow-hidden">
+            <div className="aspect-video overflow-hidden">
+              <img
+                src={project.cover}
+                alt={project.title}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <CardContent className="p-6">
+              <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
+              <p className="text-muted-foreground text-sm mb-4">{project.summary}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tech.map((tech) => (
+                  <Badge key={tech} variant="secondary" className="text-xs">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                {project.demo && (
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={project.demo} target="_blank" rel="noreferrer">
+                      Live Demo
+                    </a>
+                  </Button>
+                )}
+                {project.repo && (
+                  <Button variant="ghost" size="sm" asChild>
+                    <a href={project.repo} target="_blank" rel="noreferrer">
+                      View Code
+                    </a>
+                  </Button>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// Certificates Section Component
+function CertificatesSection() {
+  return (
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {certificates.map((cert) => (
+        <Card key={cert.id} variant="glass" hover className="overflow-hidden">
+          <div className="aspect-video overflow-hidden">
+            <img
+              src={cert.image}
+              alt={cert.title}
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+          <CardContent className="p-6">
+            <h3 className="font-semibold text-lg mb-2">{cert.title}</h3>
+            <p className="text-muted-foreground mb-1">{cert.issuer}</p>
+            <p className="text-sm text-muted-foreground mb-4">
+              {new Date(cert.issueDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </p>
+            {cert.file && (
+              <Button variant="outline" size="sm" asChild>
+                <a href={cert.file} download>
+                  <Download size={16} />
+                  Download
+                </a>
+              </Button>
+            )}
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  )
+}
 
 export default function Home() {
   useEffect(() => setTitle('Home · Abhay'), [])
@@ -18,7 +140,10 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section
+        id="hero"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      >
         {/* Background Elements */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float" />
@@ -86,11 +211,20 @@ export default function Home() {
                 transition={{ delay: 0.6 }}
                 className="flex flex-wrap gap-4"
               >
-                <Button size="lg" asChild>
-                  <Link to="/projects">
-                    View My Work
-                    <ArrowRight size={18} />
-                  </Link>
+                <Button
+                  size="lg"
+                  onClick={() => {
+                    const element = document.getElementById('projects')
+                    if (element) {
+                      const headerOffset = 80
+                      const elementPosition = element.offsetTop
+                      const offsetPosition = elementPosition - headerOffset
+                      window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+                    }
+                  }}
+                >
+                  View My Work
+                  <ArrowRight size={18} />
                 </Button>
                 <Button variant="outline" size="lg">
                   <Download size={18} />
@@ -140,7 +274,10 @@ export default function Home() {
               <Card variant="glass" className="p-8 max-w-sm w-full">
                 <div className="text-center space-y-6">
                   <Avatar size="2xl" className="mx-auto" animate>
-                    <AvatarImage src="https://via.placeholder.com/150x150/1f2937/f3f4f6?text=AS" alt="Abhay" />
+                    <AvatarImage
+                      src="https://via.placeholder.com/150x150/1f2937/f3f4f6?text=AS"
+                      alt="Abhay"
+                    />
                     <AvatarFallback className="text-2xl font-bold">AS</AvatarFallback>
                   </Avatar>
 
@@ -358,8 +495,38 @@ export default function Home() {
         </div>
       </SectionReveal>
 
+      {/* Projects Section */}
+      <SectionReveal id="projects" className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold">Featured Projects</h2>
+              <p className="text-xl text-muted-foreground">
+                A showcase of my recent work and contributions
+              </p>
+            </div>
+            <ProjectsSection />
+          </div>
+        </div>
+      </SectionReveal>
+
+      {/* Certificates Section */}
+      <SectionReveal id="certificates" className="py-20 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center space-y-4 mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold">Certifications</h2>
+              <p className="text-xl text-muted-foreground">
+                Professional certifications and achievements
+              </p>
+            </div>
+            <CertificatesSection />
+          </div>
+        </div>
+      </SectionReveal>
+
       {/* CTA Section */}
-      <SectionReveal id="contact" className="py-20 bg-muted/20">
+      <SectionReveal id="contact" className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <motion.div
@@ -376,17 +543,36 @@ export default function Home() {
             </motion.div>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" asChild>
-                <Link to="/contact">
-                  Get In Touch
-                  <Mail size={18} />
-                </Link>
+              <Button
+                size="lg"
+                onClick={() => {
+                  const element = document.getElementById('contact')
+                  if (element) {
+                    const headerOffset = 80
+                    const elementPosition = element.offsetTop
+                    const offsetPosition = elementPosition - headerOffset
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+                  }
+                }}
+              >
+                Get In Touch
+                <Mail size={18} />
               </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/projects">
-                  View My Work
-                  <ArrowRight size={18} />
-                </Link>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => {
+                  const element = document.getElementById('projects')
+                  if (element) {
+                    const headerOffset = 80
+                    const elementPosition = element.offsetTop
+                    const offsetPosition = elementPosition - headerOffset
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+                  }
+                }}
+              >
+                View My Work
+                <ArrowRight size={18} />
               </Button>
             </div>
           </div>

@@ -5,11 +5,7 @@ import { Menu, X, Home, User, Code, BarChart3, Mail, FolderOpen, Award } from 'l
 import { Button } from './Button'
 import { classNames } from '~/lib/utils'
 
-// Navigation items for other pages
-const pageNavItems = [
-  { to: '/projects', label: 'Projects', icon: FolderOpen },
-  { to: '/certificates', label: 'Certificates', icon: Award },
-]
+
 
 // Section navigation items for home page
 const sectionNavItems = [
@@ -17,6 +13,8 @@ const sectionNavItems = [
   { to: '#about', label: 'About', icon: User },
   { to: '#skills', label: 'Skills', icon: Code },
   { to: '#stats', label: 'Stats', icon: BarChart3 },
+  { to: '#projects', label: 'Projects', icon: FolderOpen },
+  { to: '#certificates', label: 'Certificates', icon: Award },
   { to: '#contact', label: 'Contact', icon: Mail },
 ]
 
@@ -25,30 +23,27 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
   const location = useLocation()
-  const isHomePage = location.pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
       
-      // Update active section based on scroll position (only on home page)
-      if (isHomePage) {
-        const sections = ['hero', 'about', 'skills', 'stats', 'contact']
-        const scrollPosition = window.scrollY + 120 // Account for header height
-        
-        for (let i = sections.length - 1; i >= 0; i--) {
-          const element = document.getElementById(sections[i])
-          if (element && element.offsetTop <= scrollPosition) {
-            setActiveSection(sections[i])
-            break
-          }
+      // Update active section based on scroll position
+      const sections = ['hero', 'about', 'skills', 'stats', 'projects', 'certificates', 'contact']
+      const scrollPosition = window.scrollY + 120 // Account for header height
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i])
+        if (element && element.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i])
+          break
         }
       }
     }
     
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [isHomePage])
+  }, [])
 
   useEffect(() => {
     setIsOpen(false)
@@ -91,86 +86,34 @@ export function Nav() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1">
-              {isHomePage ? (
-                // Section navigation for home page
-                sectionNavItems.map((item) => {
-                  const Icon = item.icon
-                  const sectionId = item.to.replace('#', '')
-                  const isActive = activeSection === sectionId
-                  
-                  return (
-                    <button
-                      key={item.to}
-                      onClick={() => handleSectionClick(sectionId)}
-                      className={classNames(
-                        'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2',
-                        isActive
-                          ? 'text-primary bg-primary/10'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
-                      )}
-                    >
-                      <Icon size={16} />
-                      {item.label}
-                      {isActive && (
-                        <motion.div
-                          className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"
-                          layoutId="activeTab"
-                          transition={{ duration: 0.2 }}
-                        />
-                      )}
-                    </button>
-                  )
-                })
-              ) : (
-                // Page navigation for other pages
-                <>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      classNames(
-                        'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2',
-                        isActive
-                          ? 'text-primary bg-primary/10'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
-                      )
-                    }
+              {sectionNavItems.map((item) => {
+                const Icon = item.icon
+                const sectionId = item.to.replace('#', '')
+                const isActive = activeSection === sectionId
+                
+                return (
+                  <button
+                    key={item.to}
+                    onClick={() => handleSectionClick(sectionId)}
+                    className={classNames(
+                      'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2',
+                      isActive
+                        ? 'text-primary bg-primary/10'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
+                    )}
                   >
-                    <Home size={16} />
-                    Home
-                  </NavLink>
-                  {pageNavItems.map((item) => {
-                    const Icon = item.icon
-                    return (
-                      <NavLink
-                        key={item.to}
-                        to={item.to}
-                        className={({ isActive }) =>
-                          classNames(
-                            'relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2',
-                            isActive
-                              ? 'text-primary bg-primary/10'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
-                          )
-                        }
-                      >
-                        {({ isActive }) => (
-                          <>
-                            <Icon size={16} />
-                            {item.label}
-                            {isActive && (
-                              <motion.div
-                                className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"
-                                layoutId="activeTab"
-                                transition={{ duration: 0.2 }}
-                              />
-                            )}
-                          </>
-                        )}
-                      </NavLink>
-                    )
-                  })}
-                </>
-              )}
+                    <Icon size={16} />
+                    {item.label}
+                    {isActive && (
+                      <motion.div
+                        className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"
+                        layoutId="activeTab"
+                        transition={{ duration: 0.2 }}
+                      />
+                    )}
+                  </button>
+                )
+              })}
             </nav>
 
             {/* Mobile Menu Button */}
@@ -206,68 +149,27 @@ export function Nav() {
             >
               <div className="container mx-auto px-4 py-4">
                 <div className="flex flex-col gap-2">
-                  {isHomePage ? (
-                    // Section navigation for home page
-                    sectionNavItems.map((item) => {
-                      const Icon = item.icon
-                      const sectionId = item.to.replace('#', '')
-                      const isActive = activeSection === sectionId
-                      
-                      return (
-                        <button
-                          key={item.to}
-                          onClick={() => handleSectionClick(sectionId)}
-                          className={classNames(
-                            'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 text-left',
-                            isActive
-                              ? 'text-primary bg-primary/10 border border-primary/20'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
-                          )}
-                        >
-                          <Icon size={18} />
-                          {item.label}
-                        </button>
-                      )
-                    })
-                  ) : (
-                    // Page navigation for other pages
-                    <>
-                      <NavLink
-                        to="/"
-                        className={({ isActive }) =>
-                          classNames(
-                            'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
-                            isActive
-                              ? 'text-primary bg-primary/10 border border-primary/20'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
-                          )
-                        }
+                  {sectionNavItems.map((item) => {
+                    const Icon = item.icon
+                    const sectionId = item.to.replace('#', '')
+                    const isActive = activeSection === sectionId
+                    
+                    return (
+                      <button
+                        key={item.to}
+                        onClick={() => handleSectionClick(sectionId)}
+                        className={classNames(
+                          'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 text-left',
+                          isActive
+                            ? 'text-primary bg-primary/10 border border-primary/20'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
+                        )}
                       >
-                        <Home size={18} />
-                        Home
-                      </NavLink>
-                      {pageNavItems.map((item) => {
-                        const Icon = item.icon
-                        return (
-                          <NavLink
-                            key={item.to}
-                            to={item.to}
-                            className={({ isActive }) =>
-                              classNames(
-                                'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
-                                isActive
-                                  ? 'text-primary bg-primary/10 border border-primary/20'
-                                  : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
-                              )
-                            }
-                          >
-                            <Icon size={18} />
-                            {item.label}
-                          </NavLink>
-                        )
-                      })}
-                    </>
-                  )}
+                        <Icon size={18} />
+                        {item.label}
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
             </motion.nav>

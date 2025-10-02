@@ -31,7 +31,8 @@ Production-ready, dark-themed portfolio app with client routing, animations, MDX
 
 ## Architecture
 
-- `src/routes` defines client routes and lazy-loaded heavy pages
+- Single-page application with smooth scrolling navigation
+- `src/pages/Home.tsx` contains all sections (Hero, About, Skills, Stats, Projects, Certificates, Contact)
 - `src/layouts/MainLayout` provides shell with theme toggle and nav
 - `src/context` holds theme context
 - `src/data` static JSON for projects/certs/skills/stats
