@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Nav } from '~/components/Nav'
+import { Footer } from '~/components/Footer'
 import { ThemeProvider } from '~/context/ThemeContext'
 import { useTheme } from '~/hooks/useTheme'
 import { Moon, Sun } from 'lucide-react'
@@ -41,6 +42,8 @@ function Shell() {
       >
         <Outlet />
       </motion.main>
+
+      <Footer />
     </div>
   )
 }

@@ -14,7 +14,7 @@ const SocialLinks = memo(({ variant = 'hero', className = '' }: SocialLinksProps
       case 'profile':
         return 'p-2 rounded-full bg-muted/50 text-muted-foreground transition-all duration-200'
       case 'footer':
-        return ''
+        return 'p-2 rounded-lg bg-muted/30 text-muted-foreground hover:bg-primary/20 hover:text-primary transition-all duration-200'
       default:
         return ''
     }
@@ -42,6 +42,34 @@ const SocialLinks = memo(({ variant = 'hero', className = '' }: SocialLinksProps
               }}
             >
               <Icon size={16} />
+            </motion.a>
+          )
+        })}
+      </div>
+    )
+  }
+
+  if (variant === 'footer') {
+    return (
+      <div className={`flex gap-2 ${className}`}>
+        {socialLinks.map((social, index) => {
+          const Icon = social.icon
+          return (
+            <motion.a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className={getVariantStyles()}
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <Icon size={18} />
             </motion.a>
           )
         })}
