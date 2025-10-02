@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState, useMemo } from 'react'
 
-
 import { ArrowRight, Download, Github, Linkedin, Mail, MapPin, Calendar } from 'lucide-react'
 import { setTitle } from '~/lib/seo'
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/Card'
@@ -162,7 +161,7 @@ export default function Home() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="space-y-8"
+              className="space-y-8 pl-10"
             >
               <div className="space-y-4">
                 <motion.div
@@ -271,7 +270,7 @@ export default function Home() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-center lg:justify-end"
+              className="flex justify-center lg:justify-center lg:pr-8"
             >
               <Card variant="glass" className="p-8 max-w-sm w-full">
                 <div className="text-center space-y-6">
