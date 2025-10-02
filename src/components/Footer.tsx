@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Heart, Mail, MapPin, ExternalLink } from 'lucide-react'
+import { Mail, MapPin, ExternalLink } from 'lucide-react'
 import { SocialLinks } from './SocialLinks'
 
 export function Footer() {
@@ -19,28 +19,28 @@ export function Footer() {
             >
               <h3 className="text-2xl font-bold text-gradient">Abhay Ravindra Shanbhag</h3>
               <p className="text-muted-foreground max-w-md leading-relaxed">
-                B.Tech student in IoT & Cybersecurity with blockchain specialization. 
-                Building secure, intelligent digital systems and exploring the future of technology.
+                B.Tech student in IoT & Cybersecurity with blockchain specialization. Building
+                secure, intelligent digital systems and exploring the future of technology.
               </p>
             </motion.div>
 
             {/* Contact Info */}
             <div className="space-y-3">
-              <motion.div 
+              <motion.div
                 className="flex items-center gap-3 text-sm"
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
               >
                 <Mail size={16} className="text-primary" />
-                <a 
-                  href="mailto:arsabhayrs@gmail.com" 
+                <a
+                  href="mailto:arsabhayrs@gmail.com"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   arsabhayrs@gmail.com
                 </a>
               </motion.div>
-              
-              <motion.div 
+
+              <motion.div
                 className="flex items-center gap-3 text-sm"
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
@@ -53,7 +53,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <motion.h4 
+            <motion.h4
               className="font-semibold text-lg"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ export function Footer() {
                 { name: 'Skills', href: '#skills' },
                 { name: 'Projects', href: '#projects' },
                 { name: 'Certificates', href: '#certificates' },
-                { name: 'Contact', href: '#contact' }
+                { name: 'Contact', href: '#contact' },
               ].map((link, index) => (
                 <motion.div
                   key={link.name}
@@ -92,7 +92,10 @@ export function Footer() {
                     }}
                   >
                     {link.name}
-                    <ExternalLink size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ExternalLink
+                      size={12}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    />
                   </a>
                 </motion.div>
               ))}
@@ -101,7 +104,7 @@ export function Footer() {
 
           {/* Social Links */}
           <div className="space-y-4">
-            <motion.h4 
+            <motion.h4
               className="font-semibold text-lg"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -118,8 +121,8 @@ export function Footer() {
               >
                 <SocialLinks variant="footer" />
               </motion.div>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-xs text-muted-foreground"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -133,7 +136,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <motion.div 
+        <motion.div
           className="mt-12 pt-8 border-t border-border"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -146,11 +149,14 @@ export function Footer() {
               <span>© {currentYear} Abhay Ravindra Shanbhag. All rights reserved.</span>
             </div>
 
-            
+            {/* Tech Stack */}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span>Built with React, TypeScript & Tailwind CSS</span>
+            </div>
           </div>
 
           {/* Additional Info */}
-          <motion.div 
+          <motion.div
             className="mt-4 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
