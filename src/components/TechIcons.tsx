@@ -42,7 +42,7 @@ export const JavaScriptIcon: React.FC<TechIconProps> = ({ className = '', size =
 // Solidity Icon
 export const SolidityIcon: React.FC<TechIconProps> = ({ className = '', size = 20 }) => (
   <img
-    src="/images/Screenshot_2025-10-02_151303-removebg-preview.png"
+    src="./images/Screenshot_2025-10-02_151303-removebg-preview.png"
     alt="Solidity"
     width={size}
     height={size}

@@ -124,3 +124,7 @@ cypress/screenshots/
 
 # Sentry
 .sentryclirc
+
+data/
+
+.json

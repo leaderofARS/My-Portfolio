@@ -1,6 +1,0 @@
-[
-  { "id": "st1", "label": "Years Experience", "value": 3 },
-  { "id": "st2", "label": "Projects", "value": 24 },
-  { "id": "st3", "label": "Clients", "value": 8 },
-  { "id": "st4", "label": "Lines of Code", "value": 120000 }
-]

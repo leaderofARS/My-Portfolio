@@ -1,140 +1,23 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect } from 'react'
 
-import { ArrowRight, Download, Github, Linkedin, Mail, MapPin, Calendar } from 'lucide-react'
+import { ArrowRight, Download, MapPin, Calendar, Mail } from 'lucide-react'
 import { setTitle } from '~/lib/seo'
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/Card'
+import { Card, CardContent } from '~/components/Card'
 import { Button } from '~/components/Button'
 import { Badge } from '~/components/ui/Badge'
 import { Avatar, AvatarImage, AvatarFallback } from '~/components/ui/Avatar'
 import { ContactForm } from '~/components/ContactForm'
-import { techIcons } from '~/constants/techIcons'
+import { SocialLinks } from '~/components/SocialLinks'
+import { ProjectsSection } from '~/components/sections/ProjectsSection'
+import { CertificatesSection } from '~/components/sections/CertificatesSection'
+import { SkillsSection } from '~/components/sections/SkillsSection'
+import { StatsSection } from '~/components/sections/StatsSection'
 
-import { StatCounter } from '~/components/StatCounter'
 import { SectionReveal } from '~/components/SectionReveal'
-import { Progress } from '~/components/Progress'
-import projects from '~/data/projects.json'
-import certificates from '~/data/certificates.json'
 
-// Projects Section Component
-function ProjectsSection() {
-  const allTags = Array.from(new Set(projects.flatMap((p) => p.tags)))
-  const [selected, setSelected] = useState<string | 'all'>('all')
-  const visible = useMemo(
-    () => (selected === 'all' ? projects : projects.filter((p) => p.tags.includes(selected))),
-    [selected],
-  )
 
-  return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap justify-center gap-2">
-        <button
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-            selected === 'all'
-              ? 'bg-primary text-primary-foreground'
-              : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-          }`}
-          onClick={() => setSelected('all')}
-        >
-          All
-        </button>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-              selected === tag
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-            }`}
-            onClick={() => setSelected(tag)}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {visible.map((project) => (
-          <Card key={project.id} variant="glass" hover className="overflow-hidden">
-            <div className="aspect-video overflow-hidden">
-              <img
-                src={project.cover}
-                alt={project.title}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <CardContent className="p-6">
-              <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
-              <p className="text-muted-foreground text-sm mb-4">{project.summary}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech) => (
-                  <Badge key={tech} variant="secondary" className="text-xs">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-              <div className="flex gap-3">
-                {project.demo && (
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.demo} target="_blank" rel="noreferrer">
-                      Live Demo
-                    </a>
-                  </Button>
-                )}
-                {project.repo && (
-                  <Button variant="ghost" size="sm" asChild>
-                    <a href={project.repo} target="_blank" rel="noreferrer">
-                      View Code
-                    </a>
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  )
-}
 
-// Certificates Section Component
-function CertificatesSection() {
-  return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {certificates.map((cert) => (
-        <Card key={cert.id} variant="glass" hover className="overflow-hidden">
-          <div className="aspect-video overflow-hidden">
-            <img
-              src={cert.image}
-              alt={cert.title}
-              loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-          </div>
-          <CardContent className="p-6">
-            <h3 className="font-semibold text-lg mb-2">{cert.title}</h3>
-            <p className="text-muted-foreground mb-1">{cert.issuer}</p>
-            <p className="text-sm text-muted-foreground mb-4">
-              {new Date(cert.issueDate).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
-            {cert.file && (
-              <Button variant="outline" size="sm" asChild>
-                <a href={cert.file} download>
-                  <Download size={16} />
-                  Download
-                </a>
-              </Button>
-            )}
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  )
-}
 
 export default function Home() {
   useEffect(() => setTitle('Home · Abhay'), [])
@@ -241,28 +124,7 @@ export default function Home() {
                 className="flex items-center gap-4 pt-4"
               >
                 <span className="text-sm text-muted-foreground">Connect with me:</span>
-                <div className="flex gap-2">
-                  {[
-                    { icon: Github, href: 'https://github.com/leaderofARs', label: 'GitHub' },
-                    { icon: Linkedin, href: 'https://www.linkedin.com/in/abhay-ravindra-shanbhag-900ab5330/', label: 'LinkedIn' },
-                    { icon: Mail, href: 'mailto:arsabhayrs@gmail.com', label: 'Email' },
-                  ].map((social) => {
-                    const Icon = social.icon
-                    return (
-                      <Button key={social.label} variant="ghost" size="sm" asChild>
-                        <motion.a
-                          href={social.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                        >
-                          <Icon size={18} />
-                        </motion.a>
-                      </Button>
-                    )
-                  })}
-                </div>
+                <SocialLinks />
               </motion.div>
             </motion.div>
 
@@ -291,7 +153,7 @@ export default function Home() {
                     >
                       <Avatar size="2xl" className="mx-auto" animate>
                         <AvatarImage
-                          src="/images/abhay_sitting3.jpg"
+                          src="./images/abhay_sitting3.jpg"
                           alt="Abhay Ravindra Shanbhag"
                         />
                         <AvatarFallback className="text-2xl font-bold">AS</AvatarFallback>
@@ -397,53 +259,7 @@ export default function Home() {
                     </div>
 
                     {/* Interactive Social Links */}
-                    <motion.div
-                      className="flex justify-center gap-3 pt-2"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                    >
-                      {[
-                        {
-                          icon: Github,
-                          href: 'https://github.com/leaderofARs',
-                          color: 'hover:text-white hover:bg-gray-800',
-                        },
-                        {
-                          icon: Linkedin,
-                          href: 'https://www.linkedin.com/in/abhay-ravindra-shanbhag-900ab5330/',
-                          color: 'hover:text-blue-400',
-                        },
-                        {
-                          icon: Mail,
-                          href: 'mailto:arsabhayrs@gmail.com',
-                          color: 'hover:text-green-400',
-                        },
-                      ].map((social, index) => {
-                        const Icon = social.icon
-                        return (
-                          <motion.a
-                            key={index}
-                            href={social.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`p-2 rounded-full bg-muted/50 text-muted-foreground transition-all duration-200 ${social.color}`}
-                            whileHover={{ scale: 1.2, rotate: 10 }}
-                            whileTap={{ scale: 0.9 }}
-                            animate={{
-                              y: [0, -2, 0],
-                            }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              delay: index * 0.3,
-                            }}
-                          >
-                            <Icon size={16} />
-                          </motion.a>
-                        )
-                      })}
-                    </motion.div>
+                    <SocialLinks variant="profile" />
                   </div>
                 </Card>
               </motion.div>
@@ -611,215 +427,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <motion.div whileHover={{ scale: 1.02, y: -5 }} transition={{ duration: 0.3 }}>
-                <Card variant="glass" padding="lg" className="h-full group cursor-pointer">
-                  <CardHeader>
-                    <motion.div whileHover={{ scale: 1.05 }}>
-                      <CardTitle className="text-lg bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-                        Programming Languages
-                      </CardTitle>
-                    </motion.div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {[
-                      { name: 'Python', level: 90, color: 'bg-yellow-500' },
-                      { name: 'C++', level: 85, color: 'bg-blue-500' },
-                      { name: 'JavaScript', level: 70, color: 'bg-yellow-400' },
-                      { name: 'Solidity', level: 60, color: 'bg-gray-600' },
-                    ].map((skill, index) => {
-                      const IconComponent = techIcons[skill.name as keyof typeof techIcons]
-                      return (
-                        <motion.div
-                          key={skill.name}
-                          className="space-y-2 p-2 rounded-lg hover:bg-accent/30 transition-colors"
-                          whileHover={{ x: 5 }}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              {IconComponent && (
-                                <motion.div
-                                  animate={{ rotate: [0, 5, -5, 0] }}
-                                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                                >
-                                  <IconComponent size={18} />
-                                </motion.div>
-                              )}
-                              <span className="font-medium">{skill.name}</span>
-                            </div>
-                            <motion.span
-                              className="text-primary font-semibold"
-                              animate={{ scale: [1, 1.1, 1] }}
-                              transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
-                            >
-                              {skill.level}%
-                            </motion.span>
-                          </div>
-                          <Progress value={skill.level} />
-                        </motion.div>
-                      )
-                    })}
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div whileHover={{ scale: 1.02, y: -5 }} transition={{ duration: 0.3 }}>
-                <Card variant="glass" padding="lg" className="h-full group cursor-pointer">
-                  <CardHeader>
-                    <motion.div whileHover={{ scale: 1.05 }}>
-                      <CardTitle className="text-lg bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-                        Frontend Development
-                      </CardTitle>
-                    </motion.div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {[
-                      { name: 'React', level: 80, color: 'bg-blue-400' },
-                      { name: 'TypeScript', level: 75, color: 'bg-blue-600' },
-                      { name: 'Tailwind CSS', level: 85, color: 'bg-teal-500' },
-                      { name: 'Framer Motion', level: 70, color: 'bg-purple-500' },
-                    ].map((skill, index) => {
-                      const IconComponent = techIcons[skill.name as keyof typeof techIcons]
-                      return (
-                        <motion.div
-                          key={skill.name}
-                          className="space-y-2 p-2 rounded-lg hover:bg-accent/30 transition-colors"
-                          whileHover={{ x: 5 }}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              {IconComponent && (
-                                <motion.div
-                                  animate={{ rotate: [0, 5, -5, 0] }}
-                                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                                >
-                                  <IconComponent size={18} />
-                                </motion.div>
-                              )}
-                              <span className="font-medium">{skill.name}</span>
-                            </div>
-                            <motion.span
-                              className="text-primary font-semibold"
-                              animate={{ scale: [1, 1.1, 1] }}
-                              transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
-                            >
-                              {skill.level}%
-                            </motion.span>
-                          </div>
-                          <Progress value={skill.level} />
-                        </motion.div>
-                      )
-                    })}
-                  </CardContent>
-                </Card>
-              </motion.div>
-
-              <motion.div whileHover={{ scale: 1.02, y: -5 }} transition={{ duration: 0.3 }}>
-                <Card variant="glass" padding="lg" className="h-full group cursor-pointer">
-                  <CardHeader>
-                    <motion.div whileHover={{ scale: 1.05 }}>
-                      <CardTitle className="text-lg bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-                        Backend & Tools
-                      </CardTitle>
-                    </motion.div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {[
-                      { name: 'Node.js', level: 65, color: 'bg-green-500' },
-                      { name: 'Smart Contract', level: 80, color: 'bg-green-600' },
-                      { name: 'Git/GitHub', level: 90, color: 'bg-gray-800' },
-                      { name: 'AI/ML', level: 75, color: 'bg-orange-500' },
-                    ].map((skill, index) => {
-                      const IconComponent = techIcons[skill.name as keyof typeof techIcons]
-                      return (
-                        <motion.div
-                          key={skill.name}
-                          className="space-y-2 p-2 rounded-lg hover:bg-accent/30 transition-colors"
-                          whileHover={{ x: 5 }}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              {IconComponent && (
-                                <motion.div
-                                  animate={{ rotate: [0, 5, -5, 0] }}
-                                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                                >
-                                  <IconComponent size={18} />
-                                </motion.div>
-                              )}
-                              <span className="font-medium">{skill.name}</span>
-                            </div>
-                            <motion.span
-                              className="text-primary font-semibold"
-                              animate={{ scale: [1, 1.1, 1] }}
-                              transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
-                            >
-                              {skill.level}%
-                            </motion.span>
-                          </div>
-                          <Progress value={skill.level} />
-                        </motion.div>
-                      )
-                    })}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </div>
-
-            <motion.div
-              className="mt-8"
-              whileHover={{ scale: 1.01, y: -3 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Card variant="glass" padding="lg" className="group cursor-pointer">
-                <CardHeader>
-                  <motion.div whileHover={{ scale: 1.05 }}>
-                    <CardTitle className="text-lg bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-                      Currently Learning
-                    </CardTitle>
-                  </motion.div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {['Next.js', 'Docker', 'AWS', 'GraphQL', 'Three.js', 'Rust', 'Web3'].map(
-                      (tech, index) => (
-                        <motion.div
-                          key={tech}
-                          whileHover={{ scale: 1.1, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
-                          animate={{
-                            y: [0, -3, 0],
-                            rotate: [0, 1, -1, 0],
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            delay: index * 0.2,
-                          }}
-                        >
-                          <Badge
-                            variant="secondary"
-                            animate
-                            className="cursor-pointer hover:bg-primary/20 hover:text-primary transition-colors"
-                          >
-                            {tech}
-                          </Badge>
-                        </motion.div>
-                      ),
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <SkillsSection />
           </div>
         </div>
       </SectionReveal>
@@ -827,18 +435,13 @@ export default function Home() {
       {/* Stats Section */}
       <SectionReveal id="stats" className="py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-12">
+          <div className="max-w-6xl mx-auto text-center space-y-12">
             <div className="space-y-4">
               <h2 className="text-3xl md:text-4xl font-bold">By the Numbers</h2>
-              <p className="text-xl text-muted-foreground">A snapshot of my journey so far</p>
+              <p className="text-xl text-muted-foreground">Interactive insights into my development journey</p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <StatCounter value={2} label="Years Experience" />
-              <StatCounter value={15} label="Projects Completed" />
-              <StatCounter value={5} label="Certifications" />
-              <StatCounter value={250} label="Commits This Year" />
-            </div>
+            <StatsSection />
           </div>
         </div>
       </SectionReveal>
