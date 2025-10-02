@@ -140,7 +140,7 @@ export default function Home() {
               <Card variant="glass" className="p-8 max-w-sm w-full">
                 <div className="text-center space-y-6">
                   <Avatar size="2xl" className="mx-auto" animate>
-                    <AvatarImage src="/api/placeholder/150/150" alt="Abhay" />
+                    <AvatarImage src="https://via.placeholder.com/150x150/1f2937/f3f4f6?text=AS" alt="Abhay" />
                     <AvatarFallback className="text-2xl font-bold">AS</AvatarFallback>
                   </Avatar>
 

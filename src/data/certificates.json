@@ -4,42 +4,42 @@
     "title": "AWS Certified Cloud Practitioner",
     "issuer": "Amazon Web Services",
     "issueDate": "2024-08-01",
-    "image": "/assets/certificates/aws.png",
-    "file": "/assets/certificates/aws.pdf"
+    "image": "./assets/placeholder.svg",
+    "file": "./assets/certificates/aws.pdf"
   },
   {
     "id": "c2",
     "title": "Google Associate Cloud Engineer",
     "issuer": "Google Cloud",
     "issueDate": "2024-05-15",
-    "image": "/assets/certificates/gcp.png"
+    "image": "./assets/placeholder.svg"
   },
   {
     "id": "c3",
     "title": "Frontend Web Developer",
     "issuer": "Udacity",
     "issueDate": "2023-11-10",
-    "image": "/assets/certificates/frontend.png"
+    "image": "./assets/placeholder.svg"
   },
   {
     "id": "c4",
     "title": "React Developer",
     "issuer": "Meta",
     "issueDate": "2023-07-22",
-    "image": "/assets/certificates/react.png"
+    "image": "./assets/placeholder.svg"
   },
   {
     "id": "c5",
     "title": "TypeScript Fundamentals",
     "issuer": "Microsoft",
     "issueDate": "2022-10-05",
-    "image": "/assets/certificates/ts.png"
+    "image": "./assets/placeholder.svg"
   },
   {
     "id": "c6",
     "title": "Node.js Services",
     "issuer": "OpenJS Foundation",
     "issueDate": "2022-03-18",
-    "image": "/assets/certificates/node.png"
+    "image": "./assets/placeholder.svg"
   }
 ]

@@ -7,7 +7,7 @@
     "tech": ["React", "TypeScript", "Tailwind", "Vite"],
     "repo": "https://github.com/example/ai-portfolio",
     "demo": "https://example.com/portfolio",
-    "cover": "/assets/projects/ai-portfolio.jpg",
+    "cover": "./assets/placeholder.svg",
     "slug": "ai-portfolio"
   },
   {
@@ -18,7 +18,7 @@
     "tech": ["React", "WS"],
     "repo": "https://github.com/example/chat",
     "demo": "https://example.com/chat",
-    "cover": "/assets/projects/chat.jpg",
+    "cover": "./assets/placeholder.svg",
     "slug": "realtime-chat"
   },
   {
@@ -29,7 +29,7 @@
     "tech": ["React", "D3"],
     "repo": "https://github.com/example/analytics",
     "demo": "https://example.com/analytics",
-    "cover": "/assets/projects/analytics.jpg",
+    "cover": "./assets/placeholder.svg",
     "slug": "analytics-dashboard"
   },
   {
@@ -40,7 +40,7 @@
     "tech": ["React", "Stripe"],
     "repo": "https://github.com/example/store",
     "demo": "https://example.com/store",
-    "cover": "/assets/projects/store.jpg",
+    "cover": "./assets/placeholder.svg",
     "slug": "ecommerce-store"
   },
   {
@@ -51,7 +51,7 @@
     "tech": ["React", "MDX"],
     "repo": "https://github.com/example/docs",
     "demo": "https://example.com/docs",
-    "cover": "/assets/projects/docs.jpg",
+    "cover": "./assets/placeholder.svg",
     "slug": "docs-engine"
   },
   {
@@ -62,7 +62,7 @@
     "tech": ["Node", "Sharp"],
     "repo": "https://github.com/example/img",
     "demo": "https://example.com/img",
-    "cover": "/assets/projects/img.jpg",
+    "cover": "./assets/placeholder.svg",
     "slug": "image-optimizer"
   }
 ]

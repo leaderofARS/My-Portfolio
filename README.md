@@ -40,8 +40,19 @@ Production-ready, dark-themed portfolio app with client routing, animations, MDX
 
 ## Deployment
 
+### GitHub Pages (Automatic)
+The project is configured for automatic deployment to GitHub Pages:
+1. Push to `main` branch triggers the deployment workflow
+2. The site will be available at `https://yourusername.github.io/repository-name`
+
+### Manual Deployment
 - Any static host (Vercel/Netlify). Build with `npm run build` and deploy `dist/`.
 - For Vercel: set Framework = Vite, Build = `npm run build`, Output = `dist`.
+
+### GitHub Pages Setup
+1. Go to repository Settings → Pages
+2. Set Source to "GitHub Actions"
+3. The deployment workflow will handle the rest
 
 ## Notes
 

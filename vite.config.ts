@@ -6,6 +6,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [mdx(), react()],
+  base: './', // Use relative paths for GitHub Pages
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'src'),
@@ -16,5 +17,10 @@ export default defineConfig({
   server: {
     host: true,
     open: true,
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
   },
 })
