@@ -9,12 +9,18 @@ import { Button } from '~/components/Button'
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
+  
+  const handleToggle = () => {
+    console.log('Theme toggle clicked, current theme:', theme)
+    toggleTheme()
+  }
+  
   return (
     <Button
       variant="ghost"
       size="sm"
-      onClick={toggleTheme}
-      className="fixed top-4 right-4 z-50"
+      onClick={handleToggle}
+      className="fixed top-4 right-4 z-50 bg-background/80 backdrop-blur-sm border border-border hover:bg-accent"
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}

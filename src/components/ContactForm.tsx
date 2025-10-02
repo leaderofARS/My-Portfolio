@@ -62,7 +62,7 @@ export function ContactForm() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="max-w-md mx-auto relative overflow-hidden z-10 bg-gray-800/90 backdrop-blur-sm p-8 rounded-lg shadow-2xl border border-gray-700/50"
+      className="w-96 min-h-96 mx-auto relative overflow-visible z-10 bg-gray-800/90 backdrop-blur-sm p-6 rounded-lg shadow-2xl border border-gray-700/50 flex flex-col"
     >
       {/* Background Effects */}
       <div className="absolute w-24 h-24 bg-purple-600/30 rounded-full -z-10 blur-2xl top-4 left-4" />
@@ -71,18 +71,18 @@ export function ContactForm() {
       <motion.h2
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-2xl font-bold text-white mb-6"
+        className="text-xl font-bold text-white mb-4"
       >
         Get In Touch
       </motion.h2>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-3 flex-1 flex flex-col">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
             Full Name
           </label>
           <input
@@ -92,7 +92,7 @@ export function ContactForm() {
             value={formData.name}
             onChange={handleInputChange}
             required
-            className="w-full p-3 bg-gray-700/80 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+            className="w-full p-2 bg-gray-700/80 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
             placeholder="Enter your full name"
           />
         </motion.div>
@@ -102,7 +102,7 @@ export function ContactForm() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
             Email Address
           </label>
           <input
@@ -112,7 +112,7 @@ export function ContactForm() {
             value={formData.email}
             onChange={handleInputChange}
             required
-            className="w-full p-3 bg-gray-700/80 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+            className="w-full p-2 bg-gray-700/80 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
             placeholder="your.email@example.com"
           />
         </motion.div>
@@ -122,7 +122,7 @@ export function ContactForm() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <label htmlFor="bio" className="block text-sm font-medium text-gray-300 mb-2">
+          <label htmlFor="bio" className="block text-sm font-medium text-gray-300 mb-1">
             Message
           </label>
           <textarea
@@ -130,9 +130,9 @@ export function ContactForm() {
             name="bio"
             value={formData.bio}
             onChange={handleInputChange}
-            rows={4}
+            rows={2}
             required
-            className="w-full p-3 bg-gray-700/80 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 resize-none"
+            className="w-full p-2 bg-gray-700/80 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 resize-none flex-1"
             placeholder="Tell me about your project or just say hello..."
           />
         </motion.div>

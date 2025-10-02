@@ -5,8 +5,6 @@ import { Menu, X, Home, User, Code, BarChart3, Mail, FolderOpen, Award } from 'l
 import { Button } from './Button'
 import { classNames } from '~/lib/utils'
 
-
-
 // Section navigation items for home page
 const sectionNavItems = [
   { to: '#hero', label: 'Home', icon: Home },
@@ -27,11 +25,11 @@ export function Nav() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
-      
+
       // Update active section based on scroll position
       const sections = ['hero', 'about', 'skills', 'stats', 'projects', 'certificates', 'contact']
       const scrollPosition = window.scrollY + 120 // Account for header height
-      
+
       for (let i = sections.length - 1; i >= 0; i--) {
         const element = document.getElementById(sections[i])
         if (element && element.offsetTop <= scrollPosition) {
@@ -40,7 +38,7 @@ export function Nav() {
         }
       }
     }
-    
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -58,7 +56,7 @@ export function Nav() {
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
     setIsOpen(false)
@@ -76,21 +74,25 @@ export function Nav() {
         transition={{ duration: 0.5 }}
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-center h-16 relative">
             {/* Logo */}
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="absolute left-0"
+            >
               <NavLink to="/" className="text-xl font-bold text-gradient">
-                Portfolio
+                Abhay Ravindra Shanbhag
               </NavLink>
             </motion.div>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - Centered */}
             <nav className="hidden md:flex items-center gap-1">
               {sectionNavItems.map((item) => {
                 const Icon = item.icon
                 const sectionId = item.to.replace('#', '')
                 const isActive = activeSection === sectionId
-                
+
                 return (
                   <button
                     key={item.to}
@@ -120,7 +122,7 @@ export function Nav() {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden"
+              className="md:hidden absolute right-0"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -153,7 +155,7 @@ export function Nav() {
                     const Icon = item.icon
                     const sectionId = item.to.replace('#', '')
                     const isActive = activeSection === sectionId
-                    
+
                     return (
                       <button
                         key={item.to}

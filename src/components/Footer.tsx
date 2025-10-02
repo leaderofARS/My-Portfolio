@@ -3,10 +3,10 @@ import { Github, Linkedin, Twitter, Mail, Heart } from 'lucide-react'
 import { Button } from './Button'
 
 const socialLinks = [
-  { icon: Github, href: 'https://github.com', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+  { icon: Github, href: 'https://github.com/leaderofARs', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/abhay-ravindra-shanbhag-900ab5330/', label: 'LinkedIn' },
   { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
-  { icon: Mail, href: 'mailto:contact@example.com', label: 'Email' },
+  { icon: Mail, href: 'mailto:arsabhayrs@gmail.com', label: 'Email' },
 ]
 
 export function Footer() {

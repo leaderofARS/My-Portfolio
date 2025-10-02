@@ -54,7 +54,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.44.0",
     "vite": "npm:rolldown-vite@7.1.12",
-    "vite-plugin-mdx": "^3.5.11"
+    "vite-plugin-mdx": "^2.0.1"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.1.12"

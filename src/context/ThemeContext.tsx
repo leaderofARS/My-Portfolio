@@ -6,22 +6,48 @@ const STORAGE_KEY = 'theme-preference'
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const getInitial = (): Theme => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored === 'light' || stored === 'dark') return stored
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY)
+      if (stored === 'light' || stored === 'dark') return stored
+    } catch (error) {
+      console.warn('localStorage not available:', error)
+    }
     return 'dark'
   }
 
   const [theme, setThemeState] = useState<Theme>(getInitial)
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, theme)
+    try {
+      localStorage.setItem(STORAGE_KEY, theme)
+    } catch (error) {
+      console.warn('Could not save theme to localStorage:', error)
+    }
+    
     const root = document.documentElement
-    if (theme === 'dark') root.classList.add('dark')
-    else root.classList.remove('dark')
+    console.log('Setting theme to:', theme)
+    
+    if (theme === 'dark') {
+      root.classList.add('dark')
+      root.classList.remove('light')
+    } else {
+      root.classList.remove('dark')
+      root.classList.add('light')
+    }
   }, [theme])
 
-  const setTheme = useCallback((next: Theme) => setThemeState(next), [])
-  const toggleTheme = useCallback(() => setThemeState((t) => (t === 'dark' ? 'light' : 'dark')), [])
+  const setTheme = useCallback((next: Theme) => {
+    console.log('Setting theme to:', next)
+    setThemeState(next)
+  }, [])
+  
+  const toggleTheme = useCallback(() => {
+    setThemeState((currentTheme) => {
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+      console.log('Toggling theme from', currentTheme, 'to', newTheme)
+      return newTheme
+    })
+  }, [])
 
   const value = useMemo(() => ({ theme, setTheme, toggleTheme }), [theme, setTheme, toggleTheme])
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
